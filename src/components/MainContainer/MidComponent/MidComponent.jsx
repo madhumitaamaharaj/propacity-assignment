@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Note from './Note';
 import styles from './MidComponent.module.css';
 import { v4 as uuidv4 } from 'uuid';
+import { SketchPicker } from 'react-color';
 
 const MidComponent = () => {
   const [isExpanded, setExpanded] = useState(false);
@@ -13,12 +14,11 @@ const MidComponent = () => {
     noteId: null,
     color: '#ffffff',
   });
-
   const [note, setNote] = useState({
     id: '',
     title: '',
     content: '',
-    color: '#ffffff', 
+    color: '#ffffff',
   });
 
   useEffect(() => {
@@ -28,8 +28,8 @@ const MidComponent = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNote((preValue) => ({
-      ...preValue,
+    setNote((prevValue) => ({
+      ...prevValue,
       [name]: value,
     }));
   };
@@ -64,7 +64,7 @@ const MidComponent = () => {
       id: '',
       title: '',
       content: '',
-      color: '#ffffff', 
+      color: selectedColor.color, 
     });
 
     setExpanded(false);
@@ -84,10 +84,10 @@ const MidComponent = () => {
   };
 
   const handleColorChange = (color) => {
-    setNote((prevNote) => ({
-      ...prevNote,
+    setSelectedColor({
+      ...selectedColor,
       color: color.hex,
-    }));
+    });
   };
 
   const handleColor = (id) => {
@@ -123,6 +123,7 @@ const MidComponent = () => {
           <IoIosAdd size={30} />
         </button>
       </form>
+      <SketchPicker color={selectedColor.color} onChange={handleColorChange} />
       <ToastContainer />
       {notes.map((note) => (
         <Note

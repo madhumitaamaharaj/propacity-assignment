@@ -1,13 +1,29 @@
-import React from "react";
-import { MdDelete, MdEdit } from "react-icons/md";
-import { IoIosColorPalette } from "react-icons/io";
-import { HexColorPicker } from "react-colorful";
-import styles from './Note.module.css'; 
+import React from 'react';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import { IoIosColorPalette } from 'react-icons/io';
+import { SketchPicker } from 'react-color';
+import styles from './Note.module.css';
 
-function Note({ title, content, onDelete, onEdit, onColor, id, selectedColor, handleColorChange }) {
+const Note = ({
+  title,
+  content,
+  onDelete,
+  onEdit,
+  onColor,
+  id,
+  selectedColor,
+  handleColorChange,
+}) => {
+    console.log(`Rendering Note ${id}, selectedColor:`, selectedColor);
   return (
-    <div className={styles.note} style={{ backgroundColor: selectedColor?.noteId === id ? selectedColor.color : '#ffffff' }}>
-      <h1>{title}</h1>
+    <div
+      className={styles.note}
+      style={{
+        backgroundColor:
+          selectedColor?.noteId === id ? selectedColor.color : "#ffffff",
+      }}
+    >
+    <h1>{title}</h1>
       <p>{content}</p>
       <div className={styles.actions}>
         <button onClick={() => onDelete(id)}>
@@ -20,11 +36,14 @@ function Note({ title, content, onDelete, onEdit, onColor, id, selectedColor, ha
           <IoIosColorPalette size={24} />
         </button>
         {id === selectedColor?.noteId && (
-          <HexColorPicker color={selectedColor.color} onChange={handleColorChange} />
+          <SketchPicker
+            color={selectedColor.color}
+            onChange={handleColorChange}
+          />
         )}
       </div>
     </div>
   );
-}
+};
 
 export default Note;

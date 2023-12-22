@@ -11,12 +11,13 @@
   
   .note h1 {
     font-size: 1rem;
+    color: #252525;
     margin-bottom: 6px;
   }
   
   .note p {
     font-size: 1rem;
-    color: #6f212b;
+    color: #000000;
     margin-bottom: 10px;
     white-space: pre-wrap;
     word-wrap: break-word;
