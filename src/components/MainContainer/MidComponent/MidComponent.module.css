@@ -1,0 +1,44 @@
+.form {
+    margin-bottom: 20px;
+  }
+  
+  .inputField,
+  .textareaField,
+  .colorPicker,
+  .button {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
+  .noteContainer {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .noteTitle {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .noteContent {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .deleteButton,
+  .editButton {
+    margin-right: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .deleteButton {
+    background-color: #ff6262;
+    color: #fff;
+  }
+  
+  .editButton {
+    background-color: #69c0ff;
+    color: #fff;
+  }
+  

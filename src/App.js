@@ -1,12 +1,10 @@
 import './App.css';
-import Head from './components/Header/Head';
-import Sidebar from './components/Sidebar/Sidebar';
+import MainContainer from './components/MainContainer/MainContainer';
 
 function App() {
   return (
     <div className="App">
-      <Head/>
-      <Sidebar/>
+    <MainContainer/>
     </div>
   );
 }
