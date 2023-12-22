@@ -12,7 +12,23 @@
     z-index: 1; 
   }
  
-  
+  .logo {
+    display: flex;
+    align-items: center;
+    color: #606060;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 54px; 
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 20px; 
+}
+
+
   .icon {
     font-size: 24px;
     margin-right: 10px;
