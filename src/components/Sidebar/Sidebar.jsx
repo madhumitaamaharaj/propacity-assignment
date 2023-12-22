@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import SidebarStyles from './Sidebar.module.css';
-import { RiStickyNoteFill } from "react-icons/ri";
-import { BsBell,BsFillTrashFill} from 'react-icons/bs';
-import { MdEdit, MdOutlineArchive } from "react-icons/md";
-
+import { RiStickyNoteFill } from 'react-icons/ri';
+import { BsBell, BsFillTrashFill } from 'react-icons/bs';
+import { MdEdit, MdOutlineArchive } from 'react-icons/md';
 
 const Sidebar = () => {
-
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
- 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -34,14 +31,12 @@ const Sidebar = () => {
         <li className={SidebarStyles.listItem}>
           <MdOutlineArchive className={SidebarStyles.icon} />
           <span className={SidebarStyles.listItemText}>Archive</span>
-          </li>
-          <li className={SidebarStyles.listItem}>
+        </li>
+        <li className={SidebarStyles.listItem}>
           <BsFillTrashFill className={SidebarStyles.icon} />
           <span className={SidebarStyles.listItemText}>Trash</span>
         </li>
-       
       </ul>
-      
     </div>
   );
 };

@@ -1,14 +1,15 @@
 import React from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaSearch, FaListUl } from 'react-icons/fa';
-import { IoMdSettings,IoIosApps,IoMdRefresh } from 'react-icons/io';
+import { IoMdSettings, IoIosApps, IoMdRefresh } from 'react-icons/io';
 import { CgProfile } from 'react-icons/cg';
 import styles from './Head.module.css';
 
+const iconStyle = {
+  color: '#606060',
+};
+
 const Head = ({ searchFilter, onSearchInputChange }) => {
-  const iconStyle = {
-    color: '#606060',
-  };
 
   const handleSearchInput = (e) => {
     onSearchInputChange(e.target.value);
@@ -18,13 +19,13 @@ const Head = ({ searchFilter, onSearchInputChange }) => {
     <div className={styles.headContainer}>
       <div className={styles.leftIcons}>
         <GiHamburgerMenu className={styles.icon} style={iconStyle} />
-        <a href="#" className={styles.logo}>
+        <div className={styles.logo}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Google_Keep_icon_%282020%29.svg/1489px-Google_Keep_icon_%282020%29.svg.png"
             alt="Google Keep Logo"
           />
           <span>Keep</span>
-        </a>
+        </div>
       </div>
       <div className={styles.centerIcons}>
         <div className={styles.searchContainer}>

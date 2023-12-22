@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { IoIosColorPalette } from 'react-icons/io';
 import { SketchPicker } from 'react-color';
