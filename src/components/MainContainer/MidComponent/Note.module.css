@@ -4,9 +4,11 @@
     border-radius: 7px;
     box-shadow: 0 2px 5px rgb(175, 175, 175);
     padding: 10px;
-    margin: 16px;
+    margin: auto; 
+  margin-top: 50vh; 
+  transform: translateY(-50%);
     float: left;
-    margin-right: 0;
+    margin-right: 40px;
   }
   
   .note h1 {

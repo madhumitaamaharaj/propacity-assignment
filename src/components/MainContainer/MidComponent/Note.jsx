@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { IoIosColorPalette } from 'react-icons/io';
 import { SketchPicker } from 'react-color';
@@ -14,7 +14,15 @@ const Note = ({
   selectedColor,
   handleColorChange,
 }) => {
+  const [isColorPickerVisible, setColorPickerVisibility] = useState(false);
+
   console.log(`Rendering Note ${id}, selectedColor:`, selectedColor);
+
+  const handleColorButtonClick = () => {
+    setColorPickerVisibility(!isColorPickerVisible);
+    onColor(id); 
+  };
+
   return (
     <div
       className={styles.note}
@@ -32,14 +40,16 @@ const Note = ({
         <button onClick={() => onEdit(id)}>
           <MdEdit size={24} />
         </button>
-        <button onClick={() => onColor(id)}>
+        <button onClick={handleColorButtonClick}>
           <IoIosColorPalette size={24} />
         </button>
-        {id === selectedColor?.noteId && (
-          <SketchPicker
-            color={selectedColor.color}
-            onChange={handleColorChange}
-          />
+        {isColorPickerVisible && (
+          <div className={styles.colorPickerContainer}>
+            <SketchPicker
+              color={selectedColor.color}
+              onChange={handleColorChange}
+            />
+          </div>
         )}
       </div>
     </div>
