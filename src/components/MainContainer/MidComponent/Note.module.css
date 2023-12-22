@@ -1,37 +1,50 @@
 .note {
-    background: #ffffff;
-    width: 240px;
-    border-radius: 7px;
-    box-shadow: 0 2px 5px rgb(175, 175, 175);
-    padding: 10px;
-    margin: auto; 
-  margin-top: 50vh; 
-  transform: translateY(-50%);
-    float: left;
-    margin-right: 40px;
+  background: #ffffff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px rgb(175, 175, 175);
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column; 
+}
+
+.note h1 {
+  font-size: 1rem;
+  color: #252525;
+  margin-bottom: 6px;
+}
+
+.note p {
+  font-size: 1rem;
+  color: #000000;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.note button {
+  color: rgb(255, 200, 18);
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .note {
+    flex-direction: row;
+    width: calc(33.33% - 20px);
+    margin-right: 20px;
+    max-width: none; 
   }
-  
-  .note h1 {
-    font-size: 1rem;
-    color: #252525;
-    margin-bottom: 6px;
+
+  .note:nth-child(3n) {
+    margin-right: 0;
   }
-  
-  .note p {
-    font-size: 1rem;
-    color: #000000;
-    margin-bottom: 10px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+
+  @media (min-width: 1200px) {
+    .note {
+      max-width: 300px; 
+    }
   }
-  
-  .note button {
-    position: relative;
-    float: right;
-    color: rgb(255, 200, 18);
-    border: none;
-    background: none;
-    cursor: pointer;
-    outline: none;
-  }
-  
+}

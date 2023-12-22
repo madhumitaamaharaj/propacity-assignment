@@ -3,6 +3,7 @@ import { IoIosAdd } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Note from './Note';
+import Head from '../../Header/Head';
 import styles from './MidComponent.module.css';
 import { v4 as uuidv4 } from 'uuid';
 import { SketchPicker } from 'react-color';
@@ -10,6 +11,7 @@ import { SketchPicker } from 'react-color';
 const MidComponent = () => {
   const [isExpanded, setExpanded] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [filteredNotes, setFilteredNotes] = useState([]);
   const [selectedColor, setSelectedColor] = useState({
     noteId: null,
     color: '#ffffff',
@@ -21,11 +23,22 @@ const MidComponent = () => {
     color: '#ffffff',
     isColorPickerVisible: false,
   });
+  const [searchFilter, setSearchFilter] = useState('');
 
   useEffect(() => {
     const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
     setNotes(storedNotes);
+    applySearchFilter(storedNotes);
   }, []);
+
+  const applySearchFilter = (notesToFilter) => {
+    const filtered = notesToFilter.filter(
+      (n) =>
+        n.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
+        n.content.toLowerCase().includes(searchFilter.toLowerCase())
+    );
+    setFilteredNotes(filtered);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,13 +60,12 @@ const MidComponent = () => {
           : n
       )
     );
-  
+
     setSelectedColor({
       noteId: id,
       color: notes.find((n) => n.id === id)?.color || '#ffffff',
     });
   };
-  
 
   const submitButton = (event) => {
     event.preventDefault();
@@ -66,7 +78,9 @@ const MidComponent = () => {
     const existingNote = notes.find((n) => n.id === note.id);
 
     if (existingNote) {
-      const updatedNotes = notes.map((n) => (n.id === note.id ? { ...n, ...note } : n));
+      const updatedNotes = notes.map((n) =>
+        n.id === note.id ? { ...n, ...note } : n
+      );
       setNotes(updatedNotes);
       localStorage.setItem('notes', JSON.stringify(updatedNotes));
       toast.success('Note edited successfully!');
@@ -87,6 +101,8 @@ const MidComponent = () => {
 
     setExpanded(false);
     setSelectedColor({ noteId: null, color: '#ffffff' });
+
+    applySearchFilter(notes);
   };
 
   const handleEdit = (id) => {
@@ -96,7 +112,6 @@ const MidComponent = () => {
       isColorPickerVisible: false,
     });
     setExpanded(true);
-    
   };
 
   const handleDelete = (id) => {
@@ -104,6 +119,8 @@ const MidComponent = () => {
     setNotes(updatedNotes);
     localStorage.setItem('notes', JSON.stringify(updatedNotes));
     toast.success('Note deleted successfully!');
+
+    applySearchFilter(updatedNotes);
   };
 
   const handleColorChange = (color) => {
@@ -117,50 +134,65 @@ const MidComponent = () => {
     }));
   };
 
+  const handleSearchInputChange = (filter) => {
+    setSearchFilter(filter);
+    applySearchFilter(notes);
+  };
+
   return (
-    <div className={styles.midContainer}>
-      <form>
-        {isExpanded && (
-          <input
-            value={note.title}
-            type="text"
-            placeholder="Title"
-            name="title"
-            onChange={handleChange}
-          />
-        )}
-        <p>
-          <textarea
-            value={note.content}
-            onClick={handleExpanded}
-            name="content"
-            placeholder="Take a note..."
-            onChange={handleChange}
-            rows={isExpanded ? 3 : 1}
-          ></textarea>
-        </p>
-        <button onClick={submitButton}>
-          <IoIosAdd size={30} />
-        </button>
-      </form>
-      {selectedColor.noteId !== null && note.isColorPickerVisible && (
-        <SketchPicker color={selectedColor.color} onChange={handleColorChange} />
-      )}
-      <ToastContainer />
-      {notes.map((note) => (
-        <Note
-          key={note.id}
-          title={note.title}
-          content={note.content}
-          onDelete={() => handleDelete(note.id)}
-          onEdit={() => handleEdit(note.id)}
-          onColor={() => handleColor(note.id)}
-          selectedColor={selectedColor}
-          id={note.id}
-          color={note.color}
-          handleColorChange={handleColorChange}
+    <div>
+      <Head searchFilter={searchFilter} onSearchInputChange={handleSearchInputChange} />
+      <div className={styles.midContainer}>
+        <input
+          className={styles.searchInput}
+          type="text"
+          placeholder="Search notes"
+          value={searchFilter}
+          onChange={(e) => handleSearchInputChange(e.target.value)}
         />
-      ))}
+        <form>
+          {isExpanded && (
+            <input
+              value={note.title}
+              type="text"
+              placeholder="Title"
+              name="title"
+              onChange={handleChange}
+            />
+          )}
+          <p>
+            <textarea
+              value={note.content}
+              onClick={handleExpanded}
+              name="content"
+              placeholder="Take a note..."
+              onChange={handleChange}
+              rows={isExpanded ? 3 : 1}
+            ></textarea>
+          </p>
+          <button onClick={submitButton}>
+            <IoIosAdd size={30} />
+          </button>
+        </form>
+        {selectedColor.noteId !== null && note.isColorPickerVisible && (
+          <SketchPicker color={selectedColor.color} onChange={handleColorChange} />
+        )}
+        <ToastContainer />
+        {filteredNotes.map((note) => (
+          <Note
+            key={note.id}
+            title={note.title}
+            content={note.content}
+            onDelete={() => handleDelete(note.id)}
+            onEdit={() => handleEdit(note.id)}
+            onColor={() => handleColor(note.id)}
+            selectedColor={selectedColor}
+            id={note.id}
+            color={note.color}
+            handleColorChange={handleColorChange}
+          />
+        ))}
+      </div>
     </div>
   );
 };
