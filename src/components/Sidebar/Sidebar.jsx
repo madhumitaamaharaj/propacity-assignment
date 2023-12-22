@@ -34,11 +34,12 @@ const Sidebar = () => {
         <li className={SidebarStyles.listItem}>
           <MdOutlineArchive className={SidebarStyles.icon} />
           <span className={SidebarStyles.listItemText}>Archive</span>
+          </li>
           <li className={SidebarStyles.listItem}>
           <BsFillTrashFill className={SidebarStyles.icon} />
           <span className={SidebarStyles.listItemText}>Trash</span>
         </li>
-        </li>
+       
       </ul>
       
     </div>
