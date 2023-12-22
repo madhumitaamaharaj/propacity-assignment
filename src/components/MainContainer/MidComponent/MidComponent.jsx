@@ -31,6 +31,10 @@ const MidComponent = () => {
     applySearchFilter(storedNotes);
   }, []);
 
+  useEffect(() => {
+    applySearchFilter(notes);
+  }, [notes]);
+
   const applySearchFilter = (notesToFilter) => {
     const filtered = notesToFilter.filter(
       (n) =>
@@ -101,8 +105,6 @@ const MidComponent = () => {
 
     setExpanded(false);
     setSelectedColor({ noteId: null, color: '#ffffff' });
-
-    applySearchFilter(notes);
   };
 
   const handleEdit = (id) => {
@@ -119,8 +121,6 @@ const MidComponent = () => {
     setNotes(updatedNotes);
     localStorage.setItem('notes', JSON.stringify(updatedNotes));
     toast.success('Note deleted successfully!');
-
-    applySearchFilter(updatedNotes);
   };
 
   const handleColorChange = (color) => {
