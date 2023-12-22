@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SidebarStyles from './Sidebar.module.css';
 import { RiStickyNoteFill } from 'react-icons/ri';
 import { BsBell, BsFillTrashFill } from 'react-icons/bs';
 import { MdEdit, MdOutlineArchive } from 'react-icons/md';
 
 const Sidebar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  if (!isMenuOpen) return null;
-
   return (
     <div className={SidebarStyles.container}>
       <ul className={SidebarStyles.listItem}>

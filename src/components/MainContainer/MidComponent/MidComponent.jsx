@@ -25,16 +25,6 @@ const MidComponent = () => {
   });
   const [searchFilter, setSearchFilter] = useState('');
 
-  useEffect(() => {
-    const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
-    setNotes(storedNotes);
-    applySearchFilter(storedNotes);
-  }, []);
-
-  useEffect(() => {
-    applySearchFilter(notes);
-  }, [notes, searchFilter]);
-
   const applySearchFilter = (notesToFilter) => {
     const filtered = notesToFilter.filter(
       (n) =>
@@ -43,6 +33,16 @@ const MidComponent = () => {
     );
     setFilteredNotes(filtered);
   };
+
+  useEffect(() => {
+    const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+    setNotes(storedNotes);
+    applySearchFilter(storedNotes);
+  }, [applySearchFilter]);
+
+  useEffect(() => {
+    applySearchFilter(notes);
+  }, [notes, searchFilter, applySearchFilter]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
