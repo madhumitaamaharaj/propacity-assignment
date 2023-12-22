@@ -1,8 +1,7 @@
 import React from 'react';
-import { MdApps, MdRefresh } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaSearch, FaListUl } from 'react-icons/fa';
-import { IoMdSettings } from 'react-icons/io';
+import { IoMdSettings,IoIosApps,IoMdRefresh } from 'react-icons/io';
 import { CgProfile } from 'react-icons/cg';
 import styles from './Head.module.css';
 
@@ -42,10 +41,10 @@ const Head = ({ searchFilter, onSearchInputChange }) => {
         </div>
       </div>
       <div className={styles.rightIcons}>
-        <MdRefresh className={styles.icon} style={iconStyle} />
+        <IoMdRefresh className={styles.icon} style={iconStyle} />
         <FaListUl className={styles.icon} style={iconStyle} />
         <IoMdSettings className={styles.icon} style={iconStyle} />
-        <MdApps className={styles.icon} style={iconStyle} />
+        <IoIosApps className={styles.icon} style={iconStyle} />
         <div className={styles.iconSpacing} />
         <CgProfile className={styles.icon} style={iconStyle} />
       </div>
