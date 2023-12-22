@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# Google Keep Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simplified version of Google Keep, a note-taking application, built using React.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Objective](#objective)
+- [Requirements](#requirements)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Features](#features)
+- [Usage](#usage)
+- [Local Development](#local-development)
+- [Deployed Version](#deployed-version)
+- [Contributing](#contributing)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Objective
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Build a note-taking application using React that mimics the functionality of Google Keep. This includes displaying, creating, editing, and deleting notes, as well as additional features like color coding, responsiveness, and data persistence using local storage.
 
-### `npm test`
+## Requirements
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Note Listing:**
+   - Display a list of notes with titles and content.
+   - Visually appealing note format.
 
-### `npm run build`
+2. **Create Note:**
+   - Add a button or form to create a new note.
+   - New notes should appear at the top of the list.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Edit Note:**
+   - Allow users to edit the title and content of each note.
+   - Immediate reflection of changes.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Delete Note:**
+   - Provide an option to delete a note.
+   - Confirm with the user before deletion.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. **Responsive Design:**
+   - Ensure the application works well on desktop and mobile devices.
 
-### `npm run eject`
+6. **Color Coding:**
+   - Allow users to assign different colors to notes for organization.
+   - Color picker for choosing a note color.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+7. **Local Storage:**
+   - Save notes to local storage for persistence across page refreshes.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+8. **Bonus Feature (optional):**
+   - Implement a search functionality to filter notes based on titles or content.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Tech Stack
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React
+- CSS (styled-components for styling)
+- Local Storage for data persistence
+- Toastify Alert (Toast Message Notification)
+- create-react-app library for creating react app named Google Keep Clone
+- WebPack (Bundler)
 
-## Learn More
+## Getting Started
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Follow the instructions below to run the application locally:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+``` 
+## open bash / vs-code studio
 
-### Code Splitting
+## Clone the repository
+git clone https://github.com/madhumitaamaharaj/propacity-assignment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Change directory to the project folder
+cd propacity-assignment
 
-### Analyzing the Bundle Size
+## Switch the branch with command 
+ git checkout googlekeepclone
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Install dependencies
+npm install
 
-### Making a Progressive Web App
+## Start the development server
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Visit [http://localhost:3000] to view the application in your browser.
 
-### Advanced Configuration
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Display, create, edit, and delete notes.
+- Color coding for note organization.
+- Responsive design for various devices.
+- Local storage for data persistence.
+- Search functionality to filter notes based on their titles or content.
 
-### Deployment
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Create a new note using the "Add Note" button.
+- Click on a note to edit its title and content.
+- Use the color picker to assign a color to a note.
+- Delete a note by clicking the delete icon.
 
-### `npm run build` fails to minify
+## Local Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To contribute to the development of this project, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Make your changes and commit them.
+4. Push the changes to your fork.
+5. Create a pull request.
+
+## Deployed Version
+
+
+
+## Contributing
+
+Madhumita Chaudhuri
+## Contact
+
+## Email: madhumitamaharaj7@gmail.com
+## GitHub: https://github.com/madhumitaamaharaj
