@@ -1,6 +1,18 @@
+.notesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 60%; 
+}
+
+.notesContainer::after {
+  content: "";
+  flex: auto;
+}
+
 .note {
   background: #ffffff;
-  width: calc(33.33% - 20px);
+  width: calc(100% - 20px);
   border-radius: 7px;
   box-shadow: 0 2px 5px rgb(175, 175, 175);
   padding: 10px;
@@ -34,9 +46,16 @@
 @media (min-width: 768px) {
   .note {
     margin-right: 0;
+    width: calc(50% - 20px);
   }
 
   .note:nth-child(3n) {
     margin-right: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .note {
+    width: calc(33.33% - 20px);
   }
 }
