@@ -1,4 +1,3 @@
-
 .note {
   background: #ffffff;
   border-radius: 7px;
@@ -6,7 +5,7 @@
   padding: 10px;
   margin: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
 }
 
 .note h1 {
@@ -31,31 +30,21 @@
   outline: none;
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-.colorPickerContainer {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  margin-top: 10px;
-}
-
-
 @media (min-width: 768px) {
   .note {
     flex-direction: row;
-  }
-  
-  .noteGridItem {
-    max-width: calc(33.33% - 20px);
+    width: calc(33.33% - 20px);
     margin-right: 20px;
+    max-width: none; 
   }
 
   .note:nth-child(3n) {
     margin-right: 0;
+  }
+
+  @media (min-width: 1200px) {
+    .note {
+      max-width: 300px; 
+    }
   }
 }
