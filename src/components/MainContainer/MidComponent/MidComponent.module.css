@@ -1,14 +1,14 @@
+
 .midContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin: 10px;
 }
 
 form {
   position: relative;
-  width: 100%;
-  max-width: 600px;
+  width: 600px;
   margin: 99px auto 50px auto;
   background: #fff;
   padding: 7px;
@@ -50,7 +50,6 @@ form button {
   outline: none;
 }
 
-
 @media (max-width: 768px) {
   .midContainer {
     text-align: center;
@@ -58,12 +57,61 @@ form button {
 
   form {
     max-width: 50%;
-    margin: 69px auto 20px auto;
+    margin: 20px auto;
   }
 
   form button {
     right: 10%;
     transform: translateX(0%);
     bottom: -24px;
+  }
+}
+
+.notesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.note {
+  background: #ffffff;
+  width: calc(33.33% - 20px);
+  border-radius: 7px;
+  box-shadow: 0 2px 5px rgb(175, 175, 175);
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.note h1 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.note p {
+  font-size: 1rem;
+  color: #000000;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.note button {
+  position: relative;
+  float: right;
+  color: rgb(255, 198, 9);
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .note {
+    margin-right: 0;
+  }
+
+  .note:nth-child(3n) {
+    margin-right: 0;
   }
 }

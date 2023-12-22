@@ -33,7 +33,7 @@ const MidComponent = () => {
 
   useEffect(() => {
     applySearchFilter(notes);
-  }, [notes]);
+  }, [notes, searchFilter]);
 
   const applySearchFilter = (notesToFilter) => {
     const filtered = notesToFilter.filter(
@@ -136,20 +136,12 @@ const MidComponent = () => {
 
   const handleSearchInputChange = (filter) => {
     setSearchFilter(filter);
-    applySearchFilter(notes);
   };
 
   return (
     <div>
       <Head searchFilter={searchFilter} onSearchInputChange={handleSearchInputChange} />
       <div className={styles.midContainer}>
-        <input
-          className={styles.searchInput}
-          type="text"
-          placeholder="Search notes"
-          value={searchFilter}
-          onChange={(e) => handleSearchInputChange(e.target.value)}
-        />
         <form>
           {isExpanded && (
             <input
@@ -178,20 +170,22 @@ const MidComponent = () => {
           <SketchPicker color={selectedColor.color} onChange={handleColorChange} />
         )}
         <ToastContainer />
-        {filteredNotes.map((note) => (
-          <Note
-            key={note.id}
-            title={note.title}
-            content={note.content}
-            onDelete={() => handleDelete(note.id)}
-            onEdit={() => handleEdit(note.id)}
-            onColor={() => handleColor(note.id)}
-            selectedColor={selectedColor}
-            id={note.id}
-            color={note.color}
-            handleColorChange={handleColorChange}
-          />
-        ))}
+        <div className={styles.notesContainer}>
+          {filteredNotes.map((note, index) => (
+            <Note
+              key={note.id}
+              title={note.title}
+              content={note.content}
+              onDelete={() => handleDelete(note.id)}
+              onEdit={() => handleEdit(note.id)}
+              onColor={() => handleColor(note.id)}
+              selectedColor={selectedColor}
+              id={note.id}
+              color={note.color}
+              handleColorChange={handleColorChange}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

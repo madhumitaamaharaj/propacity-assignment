@@ -32,15 +32,16 @@ const Note = ({
       <h1>{title}</h1>
       <p>{content}</p>
       <div className={styles.actions}>
-      <button onClick={handleColorButtonClick}>
-      <IoIosColorPalette size={24} />
-    </button>
+      <button onClick={() => onDelete(id)}>
+        <MdDelete size={24} />
+      </button>
         <button onClick={() => onEdit(id)}>
           <MdEdit size={24} />
         </button>
-        <button onClick={() => onDelete(id)}>
-        <MdDelete size={24} />
-      </button>
+        
+      <button onClick={handleColorButtonClick}>
+      <IoIosColorPalette size={24} />
+    </button>
         {isColorPickerVisible && (
           <div className={styles.colorPickerContainer}>
             <SketchPicker
