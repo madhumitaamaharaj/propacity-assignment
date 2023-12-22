@@ -1,99 +1,143 @@
 import React, { useState, useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { IoIosAdd } from 'react-icons/io';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { v4 as uuidv4 } from 'uuid';
+import Note from './Note';
 import styles from './MidComponent.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 const MidComponent = () => {
+  const [isExpanded, setExpanded] = useState(false);
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState({ id: uuidv4(), title: '', content: '', color: '#ffffff' });
-  const [showForm, setShowForm] = useState(false);
+  const [selectedColor, setSelectedColor] = useState({
+    noteId: null,
+    color: '#ffffff',
+  });
+
+  const [note, setNote] = useState({
+    id: '',
+    title: '',
+    content: '',
+    color: '#ffffff', 
+  });
 
   useEffect(() => {
     const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
     setNotes(storedNotes);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes));
-  }, [notes]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNote((preValue) => ({
+      ...preValue,
+      [name]: value,
+    }));
+  };
 
-  const addNote = () => {
-    if (newNote.title.trim() !== '' || newNote.content.trim() !== '') {
-      setNotes([newNote, ...notes]);
-      setNewNote({ id: uuidv4(), title: '', content: '', color: '#ffffff' });
-      toast.success('Note created successfully');
-      setShowForm(false); 
-    } else {
-      toast.error('Please provide a title or content for the note');
+  const handleExpanded = () => {
+    setExpanded(true);
+  };
+
+  const submitButton = (event) => {
+    event.preventDefault();
+
+    if (note.title.trim() === '' && note.content.trim() === '') {
+      toast.error('Please enter a title or content before adding a note.');
+      return;
     }
-  };
 
-  const editNote = (id, updatedNote) => {
-    const updatedNotes = notes.map((note) => (note.id === id ? updatedNote : note));
-    setNotes(updatedNotes);
-    toast.success('Note edited successfully');
-  };
+    const existingNote = notes.find((n) => n.id === note.id);
 
-  const deleteNote = (id) => {
-    const confirmDelete = window.confirm('Are you sure you want to delete this note?');
-    if (confirmDelete) {
-      const updatedNotes = notes.filter((note) => note.id !== id);
+    if (existingNote) {
+      const updatedNotes = notes.map((n) => (n.id === note.id ? { ...n, ...note } : n));
       setNotes(updatedNotes);
-      toast.success('Note deleted successfully');
+      localStorage.setItem('notes', JSON.stringify(updatedNotes));
+      toast.success('Note edited successfully!');
+    } else {
+      const newNote = { ...note, id: uuidv4() };
+      setNotes((prevNotes) => [...prevNotes, newNote]);
+      localStorage.setItem('notes', JSON.stringify([...notes, newNote]));
+      toast.success('Note added successfully!');
     }
+
+    setNote({
+      id: '',
+      title: '',
+      content: '',
+      color: '#ffffff', 
+    });
+
+    setExpanded(false);
+  };
+
+  const handleEdit = (id) => {
+    const selectedNote = notes.find((n) => n.id === id);
+    setNote({ ...selectedNote });
+    setExpanded(true);
+  };
+
+  const handleDelete = (id) => {
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
+    localStorage.setItem('notes', JSON.stringify(updatedNotes));
+    toast.success('Note deleted successfully!');
+  };
+
+  const handleColorChange = (color) => {
+    setNote((prevNote) => ({
+      ...prevNote,
+      color: color.hex,
+    }));
+  };
+
+  const handleColor = (id) => {
+    setSelectedColor({
+      noteId: id,
+      color: notes.find((n) => n.id === id)?.color || '#ffffff',
+    });
   };
 
   return (
-    <div>
-      <button className={styles.button} onClick={() => setShowForm(true)}>
-        Create Note
-      </button>
-
-      {showForm && (
-        <form className={styles.form}>
+    <div className={styles.midContainer}>
+      <form>
+        {isExpanded && (
           <input
-            className={styles.inputField}
+            value={note.title}
             type="text"
             placeholder="Title"
-            value={newNote.title}
-            onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
+            name="title"
+            onChange={handleChange}
           />
+        )}
+        <p>
           <textarea
-            className={styles.textareaField}
-            placeholder="Content"
-            value={newNote.content}
-            onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
-          />
-          <input
-            className={styles.colorPicker}
-            type="color"
-            value={newNote.color}
-            onChange={(e) => setNewNote({ ...newNote, color: e.target.value })}
-          />
-          <button className={styles.button} type="button" onClick={addNote}>
-            Save Note
-          </button>
-        </form>
-      )}
-
+            value={note.content}
+            onClick={handleExpanded}
+            name="content"
+            placeholder="Take a note..."
+            onChange={handleChange}
+            rows={isExpanded ? 3 : 1}
+          ></textarea>
+        </p>
+        <button onClick={submitButton}>
+          <IoIosAdd size={30} />
+        </button>
+      </form>
+      <ToastContainer />
       {notes.map((note) => (
-        <div key={note.id} className={styles.noteContainer} style={{ border: `1px solid ${note.color}` }}>
-          <h3 className={styles.noteTitle}>{note.title}</h3>
-          <p className={styles.noteContent}>{note.content}</p>
-          <button className={`${styles.deleteButton} ${styles.editButton}`} onClick={() => deleteNote(note.id)}>
-            Delete
-          </button>
-          <button
-            className={styles.editButton}
-            onClick={() => editNote(note.id, { ...note, title: 'Updated Title' })}
-          >
-            Edit
-          </button>
-        </div>
+        <Note
+          key={note.id}
+          title={note.title}
+          content={note.content}
+          onDelete={() => handleDelete(note.id)}
+          onEdit={() => handleEdit(note.id)}
+          onColor={() => handleColor(note.id)}
+          selectedColor={selectedColor}
+          id={note.id}
+          color={note.color}
+          handleColorChange={handleColorChange}
+        />
       ))}
-
-      <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
   );
 };
