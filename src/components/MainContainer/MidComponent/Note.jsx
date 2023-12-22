@@ -14,16 +14,16 @@ const Note = ({
   selectedColor,
   handleColorChange,
 }) => {
-    console.log(`Rendering Note ${id}, selectedColor:`, selectedColor);
+  console.log(`Rendering Note ${id}, selectedColor:`, selectedColor);
   return (
     <div
       className={styles.note}
       style={{
         backgroundColor:
-          selectedColor?.noteId === id ? selectedColor.color : "#ffffff",
+          selectedColor?.noteId === id ? selectedColor.color : '#ffffff',
       }}
     >
-    <h1>{title}</h1>
+      <h1>{title}</h1>
       <p>{content}</p>
       <div className={styles.actions}>
         <button onClick={() => onDelete(id)}>

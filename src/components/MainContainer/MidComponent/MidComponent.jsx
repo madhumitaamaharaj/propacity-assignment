@@ -19,6 +19,7 @@ const MidComponent = () => {
     title: '',
     content: '',
     color: '#ffffff',
+    isColorPickerVisible: false,
   });
 
   useEffect(() => {
@@ -36,6 +37,17 @@ const MidComponent = () => {
 
   const handleExpanded = () => {
     setExpanded(true);
+  };
+
+  const handleColor = (id) => {
+    setNote((prevNote) => ({
+      ...prevNote,
+      isColorPickerVisible: !prevNote.isColorPickerVisible,
+    }));
+    setSelectedColor({
+      noteId: id,
+      color: notes.find((n) => n.id === id)?.color || '#ffffff',
+    });
   };
 
   const submitButton = (event) => {
@@ -64,16 +76,22 @@ const MidComponent = () => {
       id: '',
       title: '',
       content: '',
-      color: selectedColor.color, 
+      color: selectedColor.color,
+      isColorPickerVisible: false,
     });
 
     setExpanded(false);
+    setSelectedColor({ noteId: null, color: '#ffffff' });
   };
 
   const handleEdit = (id) => {
     const selectedNote = notes.find((n) => n.id === id);
-    setNote({ ...selectedNote });
+    setNote({
+      ...selectedNote,
+      isColorPickerVisible: false,
+    });
     setExpanded(true);
+    
   };
 
   const handleDelete = (id) => {
@@ -88,13 +106,10 @@ const MidComponent = () => {
       ...selectedColor,
       color: color.hex,
     });
-  };
-
-  const handleColor = (id) => {
-    setSelectedColor({
-      noteId: id,
-      color: notes.find((n) => n.id === id)?.color || '#ffffff',
-    });
+    setNote((prevNote) => ({
+      ...prevNote,
+      color: color.hex,
+    }));
   };
 
   return (
@@ -123,7 +138,9 @@ const MidComponent = () => {
           <IoIosAdd size={30} />
         </button>
       </form>
-      <SketchPicker color={selectedColor.color} onChange={handleColorChange} />
+      {selectedColor.noteId !== null && note.isColorPickerVisible && (
+        <SketchPicker color={selectedColor.color} onChange={handleColorChange} />
+      )}
       <ToastContainer />
       {notes.map((note) => (
         <Note
