@@ -40,15 +40,20 @@ const MidComponent = () => {
   };
 
   const handleColor = (id) => {
-    setNote((prevNote) => ({
-      ...prevNote,
-      isColorPickerVisible: !prevNote.isColorPickerVisible,
-    }));
+    setNotes((prevNotes) =>
+      prevNotes.map((n) =>
+        n.id === id
+          ? { ...n, isColorPickerVisible: !n.isColorPickerVisible }
+          : n
+      )
+    );
+  
     setSelectedColor({
       noteId: id,
       color: notes.find((n) => n.id === id)?.color || '#ffffff',
     });
   };
+  
 
   const submitButton = (event) => {
     event.preventDefault();
