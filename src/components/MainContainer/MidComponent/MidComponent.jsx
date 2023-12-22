@@ -123,14 +123,14 @@ const MidComponent = () => {
     toast.success('Note deleted successfully!');
   };
 
-  const handleColorChange = (color) => {
+  const handleColorChange = (id, color) => {
     setSelectedColor({
-      ...selectedColor,
-      color: color.hex,
+      noteId: id,
+      color: color,
     });
     setNote((prevNote) => ({
       ...prevNote,
-      color: color.hex,
+      color: color,
     }));
   };
 
@@ -167,7 +167,7 @@ const MidComponent = () => {
           </button>
         </form>
         {selectedColor.noteId !== null && note.isColorPickerVisible && (
-          <SketchPicker color={selectedColor.color} onChange={handleColorChange} />
+          <SketchPicker color={selectedColor.color} onChange={(color) => handleColorChange(selectedColor.noteId, color.hex)} />
         )}
         <ToastContainer />
         <div className={styles.notesContainer}>

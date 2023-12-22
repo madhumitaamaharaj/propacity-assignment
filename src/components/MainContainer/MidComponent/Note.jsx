@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { IoIosColorPalette } from 'react-icons/io';
 import { SketchPicker } from 'react-color';
@@ -15,7 +15,10 @@ const Note = ({
   handleColorChange,
 }) => {
   const [isColorPickerVisible, setColorPickerVisibility] = useState(false);
-  const [noteColor, setNoteColor] = useState(selectedColor?.noteId === id ? selectedColor.color : '#ffffff');
+  const [noteColor, setNoteColor] = useState(() => {
+    const storedColor = localStorage.getItem(`noteColor_${id}`);
+    return storedColor || (selectedColor?.noteId === id ? selectedColor.color : '#ffffff');
+  });
 
   const handleColorButtonClick = () => {
     setColorPickerVisibility(!isColorPickerVisible);
@@ -32,23 +35,23 @@ const Note = ({
       <h1>{title}</h1>
       <p>{content}</p>
       <div className={styles.actions}>
-      <button onClick={() => onDelete(id)}>
-        <MdDelete size={24} />
-      </button>
+        <button onClick={() => onDelete(id)}>
+          <MdDelete size={24} />
+        </button>
         <button onClick={() => onEdit(id)}>
           <MdEdit size={24} />
         </button>
-        
-      <button onClick={handleColorButtonClick}>
-      <IoIosColorPalette size={24} />
-    </button>
+        <button onClick={handleColorButtonClick}>
+          <IoIosColorPalette size={24} />
+        </button>
         {isColorPickerVisible && (
           <div className={styles.colorPickerContainer}>
             <SketchPicker
               color={noteColor}
               onChange={(color) => {
                 setNoteColor(color.hex);
-              handleColorChange(id, color.hex);
+                handleColorChange(id, color.hex);
+                localStorage.setItem(`noteColor_${id}`, color.hex);
               }}
             />
           </div>
