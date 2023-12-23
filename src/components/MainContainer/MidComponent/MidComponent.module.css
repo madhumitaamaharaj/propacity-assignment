@@ -7,7 +7,8 @@
 
 form {
   position: relative;
-  width: 600px;
+  width: 80%; 
+  max-width: 600px;
   margin: 105px auto 50px auto;
   background: #fff;
   padding: 7px;
@@ -55,12 +56,12 @@ form button {
   }
 
   form {
-    width: 50%; 
-    margin: 105px auto 50px auto;
+    width: 40%; 
+    margin: 90px auto 30px auto;
   }
 
   form button {
-    right: 5%; 
+    right: 5%;
     transform: translateX(0%);
     bottom: -24px;
   }
@@ -70,7 +71,7 @@ form button {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 60%; 
+  width: 45%; 
 }
 
 .notesContainer::after {
@@ -117,7 +118,7 @@ form button {
     width: calc(50% - 20px);
   }
 
-  .note:nth-child(3n) {
+  .note:nth-child(odd) {
     margin-right: 0;
   }
 }

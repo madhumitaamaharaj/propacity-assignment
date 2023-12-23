@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,14 +25,14 @@ const MidComponent = () => {
   });
   const [searchFilter, setSearchFilter] = useState('');
 
-  const applySearchFilter = (notesToFilter) => {
+  const applySearchFilter = useCallback((notesToFilter) => {
     const filtered = notesToFilter.filter(
       (n) =>
         n.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
         n.content.toLowerCase().includes(searchFilter.toLowerCase())
     );
     setFilteredNotes(filtered);
-  };
+  }, [searchFilter]);
 
   useEffect(() => {
     const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
